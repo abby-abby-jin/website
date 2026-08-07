@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>선진이 포폴 — 하나의 성</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="rotate-notice">
+    <div class="rotate-icon">↻</div>
+    <p>가로로 돌려주세요</p>
+  </div>
+
+  <button id="home-btn" title="로비로 돌아가기" aria-label="로비로 돌아가기">🏰</button>
+  <button id="ambience-btn" title="앰비언스 사운드" aria-label="앰비언스 사운드">🔈</button>
+  <div id="floor-indicator"></div>
+
+  <main id="app">
+
+    <!-- LOBBY -->
+    <section id="view-lobby" class="view active">
+      <div class="tower">
+        <div class="tower-layer l1"></div>
+        <div class="tower-layer l2"></div>
+        <div class="tower-layer l3"></div>
+        <div class="tower-glow"></div>
+      </div>
+      <div class="lobby-copy">
+        <p class="eyebrow">Main Hub — Lobby</p>
+        <h1>하나의 성</h1>
+        <p class="sub">층마다 살고 있는 캐릭터들</p>
+        <p class="prompt">↑ / ↓ 방향키를 눌러 탐험해보세요</p>
+      </div>
+    </section>
+
+    <!-- TRANSITION -->
+    <section id="view-transition" class="view">
+      <div class="slices">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </section>
+
+    <!-- PROJECT CHAMBER -->
+    <section id="view-chamber" class="view">
+
+      <!-- video-format chamber -->
+      <div id="chamber-video" class="chamber-type">
+        <div class="chamber-bg"></div>
+        <div class="chamber-label">
+          <p class="eyebrow" id="video-eyebrow"></p>
+          <h2 id="video-title"></h2>
+        </div>
+        <button id="video-trigger" class="trigger-btn">
+          <span class="trigger-ring"></span>
+          <span class="trigger-text">클릭 또는 Space</span>
+        </button>
+        <p class="hint">버튼을 누르면 Working Notes가 열립니다</p>
+
+        <div id="working-notes" class="panel">
+          <button class="panel-close" id="wn-close" aria-label="닫기">✕</button>
+          <div class="panel-inner">
+            <p class="eyebrow">Working Notes</p>
+            <h3 id="wn-client"></h3>
+            <p id="wn-summary"></p>
+
+            <div class="meta-grid">
+              <div><span class="meta-label">ISSUE</span><p id="wn-issue"></p></div>
+              <div><span class="meta-label">SOLUTION</span><p id="wn-solution"></p></div>
+              <div><span class="meta-label">ROLE</span><p id="wn-role"></p></div>
+            </div>
+
+            <ul id="wn-results" class="results"></ul>
+
+            <div class="credits" id="wn-script"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- sns-format chamber -->
+      <div id="chamber-sns" class="chamber-type">
+        <div class="chamber-label">
+          <p class="eyebrow" id="sns-eyebrow"></p>
+          <h2 id="sns-title"></h2>
+        </div>
+
+        <div class="carousel" id="sns-carousel"></div>
+        <p class="hint">← / → 로 게시물 탐색, 클릭하면 카피 전체 보기</p>
+
+        <div id="sns-detail" class="panel">
+          <button class="panel-close" id="sns-close" aria-label="닫기">✕</button>
+          <div class="panel-inner sns-detail-inner">
+            <div class="sns-detail-image" id="sns-detail-image"></div>
+            <p class="sns-detail-caption" id="sns-detail-caption"></p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
