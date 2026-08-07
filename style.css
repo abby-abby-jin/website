@@ -295,6 +295,20 @@ html,body{
 .results li{ padding:.3em 0; }
 .results li::before{ content:"— "; color:var(--gold); }
 
+.ref-video-wrap{
+  margin-bottom:2.4rem;
+  padding-bottom:2rem;
+  border-bottom:1px solid rgba(201,163,90,.15);
+}
+.ref-video-wrap .meta-label{ margin-bottom:.8em; }
+.ref-video{
+  width:100%;
+  max-width:520px;
+  border-radius:10px;
+  border:1px solid rgba(201,163,90,.25);
+  display:block;
+}
+
 .credits{
   text-align:center;
   font-family:'EB Garamond', serif;

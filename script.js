@@ -15,6 +15,7 @@ const floors = [
     issue: "브랜드 네임 자산화 미흡",
     solution: "빙그레우스를 활용하여 '웃음'이라는 가치를 전하려는 사람들의 도전을 숭고하게 드높이기",
     role: "첫 카피와 마지막 카피 및 말장난이 섞인 대사를 작성했습니다. 가사가 완성된 후 작곡가 및 편집팀과 커뮤니케이션하여 제작 일정 등을 조율하며 애니메이션 캠페인의 이해도와 커뮤니케이션 스킬을 쌓을 수 있었던 캠페인입니다.",
+    refVideo: "videos/binggrae-ref-500days.mp4",
     results: [
       "업로드 3주 만에 댓글 7K · 좋아요 25K",
       "25년 기준 조회수 10M 돌파",
@@ -158,6 +159,16 @@ function renderVideoChamber(floor) {
   $("#wn-results").innerHTML = floor.results
     .map((r) => `<li>${r}</li>`)
     .join("");
+
+  const refWrap = $("#wn-ref-video-wrap");
+  const refVideo = $("#wn-ref-video");
+  if (floor.refVideo) {
+    refVideo.src = floor.refVideo;
+    refWrap.hidden = false;
+  } else {
+    refVideo.removeAttribute("src");
+    refWrap.hidden = true;
+  }
 
   $("#wn-script").innerHTML = floor.script
     .map(
