@@ -46,41 +46,33 @@
     <section id="view-chamber" class="view">
 
       <!-- video-format chamber -->
-      <div id="chamber-video" class="chamber-type">
-        <div class="chamber-bg"></div>
-        <div class="chamber-label">
-          <p class="eyebrow" id="video-eyebrow"></p>
-          <h2 id="video-title"></h2>
+      <div id="chamber-video" class="chamber-type video-chamber">
+
+        <div class="video-hero">
+          <video id="hero-video" class="hero-video" muted loop playsinline autoplay></video>
+          <button id="hero-mute" class="hero-mute" aria-label="소리 켜기/끄기">🔇</button>
+          <div class="hero-overlay">
+            <p class="eyebrow" id="video-eyebrow"></p>
+            <h2 id="video-title"></h2>
+          </div>
+          <button id="wn-cta" class="wn-cta">
+            Working Note <span class="wn-cta-arrow">⌄</span>
+          </button>
         </div>
-        <button id="video-trigger" class="trigger-btn">
-          <span class="trigger-ring"></span>
-          <span class="trigger-text">클릭 또는 Space</span>
-        </button>
-        <p class="hint">버튼을 누르면 Working Notes가 열립니다</p>
 
-        <div id="working-notes" class="panel">
-          <button class="panel-close" id="wn-close" aria-label="닫기">✕</button>
-          <div class="panel-inner">
-            <p class="eyebrow">Working Notes</p>
-            <h3 id="wn-client"></h3>
-            <p id="wn-summary"></p>
-
+        <div id="working-notes" class="notes-section">
+          <div class="notes-inner">
+            <p class="eyebrow">기획의도</p>
             <div class="meta-grid">
               <div><span class="meta-label">ISSUE</span><p id="wn-issue"></p></div>
               <div><span class="meta-label">SOLUTION</span><p id="wn-solution"></p></div>
-              <div><span class="meta-label">ROLE</span><p id="wn-role"></p></div>
             </div>
 
-            <ul id="wn-results" class="results"></ul>
-
-            <div id="wn-ref-video-wrap" class="ref-video-wrap" hidden>
-              <span class="meta-label">REF. 오프닝 무빙 참고</span>
-              <video id="wn-ref-video" class="ref-video" controls playsinline></video>
-            </div>
-
+            <p class="eyebrow notes-copy-label">카피라이팅</p>
             <div class="credits" id="wn-script"></div>
           </div>
         </div>
+
       </div>
 
       <!-- sns-format chamber -->
@@ -106,6 +98,6 @@
 
   </main>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@ const floors = [
     issue: "브랜드 네임 자산화 미흡",
     solution: "빙그레우스를 활용하여 '웃음'이라는 가치를 전하려는 사람들의 도전을 숭고하게 드높이기",
     role: "첫 카피와 마지막 카피 및 말장난이 섞인 대사를 작성했습니다. 가사가 완성된 후 작곡가 및 편집팀과 커뮤니케이션하여 제작 일정 등을 조율하며 애니메이션 캠페인의 이해도와 커뮤니케이션 스킬을 쌓을 수 있었던 캠페인입니다.",
-    refVideo: "videos/binggrae-ref-500days.mp4",
+    heroVideo: "videos/binggrae-ref-500days.mp4",
     results: [
       "업로드 3주 만에 댓글 7K · 좋아요 25K",
       "25년 기준 조회수 10M 돌파",
@@ -150,25 +150,24 @@ function goToNextFloor() {
 function renderVideoChamber(floor) {
   $("#video-eyebrow").textContent = floor.eyebrow;
   $("#video-title").textContent = floor.title;
-  $("#wn-client").textContent = floor.client;
-  $("#wn-summary").textContent = floor.summary;
   $("#wn-issue").textContent = floor.issue;
   $("#wn-solution").textContent = floor.solution;
-  $("#wn-role").textContent = floor.role;
 
-  $("#wn-results").innerHTML = floor.results
-    .map((r) => `<li>${r}</li>`)
-    .join("");
-
-  const refWrap = $("#wn-ref-video-wrap");
-  const refVideo = $("#wn-ref-video");
-  if (floor.refVideo) {
-    refVideo.src = floor.refVideo;
-    refWrap.hidden = false;
+  const heroVideo = $("#hero-video");
+  if (floor.heroVideo) {
+    heroVideo.muted = true;
+    heroVideo.onpause = () => {
+      // 자동재생 정책 등으로 예기치 않게 멈추면 다시 시도
+      if (!heroVideo.ended) heroVideo.play().catch(() => {});
+    };
+    if (heroVideo.getAttribute("src") !== floor.heroVideo) {
+      heroVideo.src = floor.heroVideo;
+    }
+    heroVideo.play().catch(() => {});
   } else {
-    refVideo.removeAttribute("src");
-    refWrap.hidden = true;
+    heroVideo.removeAttribute("src");
   }
+  $("#hero-mute").textContent = "🔇";
 
   $("#wn-script").innerHTML = floor.script
     .map(
@@ -178,7 +177,24 @@ function renderVideoChamber(floor) {
     )
     .join("");
 
-  closePanel("#working-notes");
+  $("#chamber-video").scrollTo({ top: 0 });
+}
+
+function smoothScrollTo(el, target, duration = 500) {
+  const start = el.scrollTop;
+  const change = target - start;
+  const startTime = Date.now();
+  (function step() {
+    const t = Math.min(1, (Date.now() - startTime) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.scrollTop = start + change * eased;
+    if (t < 1) setTimeout(step, 16);
+  })();
+}
+
+function scrollToNotes() {
+  const container = $("#chamber-video");
+  smoothScrollTo(container, $("#working-notes").offsetTop);
 }
 
 function openPanel(sel) {
@@ -288,12 +304,10 @@ function toggleAmbience() {
 document.addEventListener("keydown", (e) => {
   if (view === "transition") return;
 
-  // 패널이 열려있으면 Escape로만 닫기
-  const wnOpen = $("#working-notes").classList.contains("open");
+  // SNS 상세 패널이 열려있으면 Escape로만 닫기
   const snsOpen = $("#sns-detail").classList.contains("open");
-  if (wnOpen || snsOpen) {
+  if (snsOpen) {
     if (e.key === "Escape" || e.key === " ") {
-      closePanel("#working-notes");
       closePanel("#sns-detail");
     }
     return;
@@ -315,7 +329,7 @@ document.addEventListener("keydown", (e) => {
     }
     if (currentFloor.type === "video" && (e.key === " " || e.key === "Enter")) {
       e.preventDefault();
-      openPanel("#working-notes");
+      scrollToNotes();
       return;
     }
     if (currentFloor.type === "sns") {
@@ -334,8 +348,12 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-$("#video-trigger").addEventListener("click", () => openPanel("#working-notes"));
-$("#wn-close").addEventListener("click", () => closePanel("#working-notes"));
+$("#wn-cta").addEventListener("click", scrollToNotes);
+$("#hero-mute").addEventListener("click", () => {
+  const v = $("#hero-video");
+  v.muted = !v.muted;
+  $("#hero-mute").textContent = v.muted ? "🔇" : "🔊";
+});
 $("#sns-close").addEventListener("click", () => closePanel("#sns-detail"));
 $("#home-btn").addEventListener("click", () => {
   if (view !== "lobby") goToLobby();
