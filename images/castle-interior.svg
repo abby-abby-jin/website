@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a2712"/>
+      <stop offset="35%" stop-color="#1c130a"/>
+      <stop offset="100%" stop-color="#080605"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="#ffe6b0" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#e8b768" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#241a10"/>
+      <stop offset="100%" stop-color="#060504"/>
+    </linearGradient>
+    <linearGradient id="archFace" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0a0806"/>
+      <stop offset="50%" stop-color="#2c2013"/>
+      <stop offset="100%" stop-color="#0a0806"/>
+    </linearGradient>
+    <linearGradient id="archFaceR" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#0a0806"/>
+      <stop offset="50%" stop-color="#2c2013"/>
+      <stop offset="100%" stop-color="#0a0806"/>
+    </linearGradient>
+    <radialGradient id="windowGlow" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffdf9e" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#c98f3a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#c98f3a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.15"/>
+      <stop offset="55%" stop-color="#000000" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="900" fill="url(#sky)"/>
+
+  <!-- distant vanishing arch with light -->
+  <ellipse cx="800" cy="330" rx="330" ry="420" fill="url(#glow)"/>
+
+  <!-- receding gothic arches (perspective corridor), back to front -->
+  <g opacity="0.95">
+    <!-- arch 5 (farthest) -->
+    <path d="M700 900 L700 430 Q700 300 800 260 Q900 300 900 430 L900 900" fill="none" stroke="#3a2a16" stroke-width="6"/>
+    <!-- arch 4 -->
+    <path d="M640 900 L640 400 Q640 240 800 190 Q960 240 960 400 L960 900" fill="none" stroke="#4a3620" stroke-width="10"/>
+    <!-- arch 3 -->
+    <path d="M560 900 L560 360 Q560 160 800 100 Q1040 160 1040 360 L1040 900" fill="none" stroke="#5c4326" stroke-width="14"/>
+    <!-- arch 2 -->
+    <path d="M440 900 L440 300 Q440 60 800 -10 Q1160 60 1160 300 L1160 900" fill="none" stroke="#70532e" stroke-width="20"/>
+  </g>
+
+  <!-- left wall face (foreground arch, receding) -->
+  <path d="M0 900 L0 60 L260 40 Q170 160 170 360 L170 900 Z" fill="url(#archFace)"/>
+  <!-- right wall face -->
+  <path d="M1600 900 L1600 60 L1340 40 Q1430 160 1430 360 L1430 900 Z" fill="url(#archFaceR)"/>
+
+  <!-- left row of tall windows -->
+  <g>
+    <rect x="40" y="160" width="70" height="300" rx="35" fill="#0c0906"/>
+    <rect x="46" y="170" width="58" height="280" rx="29" fill="url(#windowGlow)"/>
+    <rect x="230" y="230" width="55" height="230" rx="27" fill="#0c0906"/>
+    <rect x="235" y="238" width="45" height="214" rx="22" fill="url(#windowGlow)" opacity="0.85"/>
+  </g>
+  <!-- right row of tall windows -->
+  <g>
+    <rect x="1490" y="160" width="70" height="300" rx="35" fill="#0c0906"/>
+    <rect x="1496" y="170" width="58" height="280" rx="29" fill="url(#windowGlow)"/>
+    <rect x="1315" y="230" width="55" height="230" rx="27" fill="#0c0906"/>
+    <rect x="1320" y="238" width="45" height="214" rx="22" fill="url(#windowGlow)" opacity="0.85"/>
+  </g>
+
+  <!-- floor -->
+  <path d="M0 900 L620 900 L740 470 L860 470 L980 900 L1600 900 Z" fill="url(#floor)"/>
+  <!-- floor tile lines (perspective) -->
+  <g stroke="#3a2a16" stroke-width="2" opacity="0.55">
+    <line x1="800" y1="470" x2="60" y2="900"/>
+    <line x1="800" y1="470" x2="300" y2="900"/>
+    <line x1="800" y1="470" x2="540" y2="900"/>
+    <line x1="800" y1="470" x2="800" y2="900"/>
+    <line x1="800" y1="470" x2="1060" y2="900"/>
+    <line x1="800" y1="470" x2="1300" y2="900"/>
+    <line x1="800" y1="470" x2="1540" y2="900"/>
+    <path d="M700 620 L900 620" fill="none"/>
+    <path d="M660 700 L940 700" fill="none"/>
+    <path d="M600 800 L1000 800" fill="none"/>
+  </g>
+
+  <!-- chandelier -->
+  <g transform="translate(800,140)">
+    <line x1="0" y1="-140" x2="0" y2="-10" stroke="#4a3620" stroke-width="3"/>
+    <ellipse cx="0" cy="0" rx="90" ry="18" fill="none" stroke="#8a6a37" stroke-width="4"/>
+    <ellipse cx="0" cy="0" rx="90" ry="18" fill="url(#windowGlow)" opacity="0.5"/>
+    <g fill="#ffdf9e">
+      <circle cx="-70" cy="4" r="5"/>
+      <circle cx="-35" cy="10" r="5"/>
+      <circle cx="0" cy="12" r="6"/>
+      <circle cx="35" cy="10" r="5"/>
+      <circle cx="70" cy="4" r="5"/>
+    </g>
+  </g>
+
+  <!-- bookshelves silhouette along lower side walls -->
+  <g opacity="0.9">
+    <g transform="translate(20,560)">
+      <rect width="150" height="300" fill="#0b0805"/>
+      <g stroke="#241a10" stroke-width="4">
+        <line x1="0" y1="40" x2="150" y2="40"/>
+        <line x1="0" y1="90" x2="150" y2="90"/>
+        <line x1="0" y1="140" x2="150" y2="140"/>
+        <line x1="0" y1="190" x2="150" y2="190"/>
+        <line x1="0" y1="240" x2="150" y2="240"/>
+      </g>
+      <g fill="#5c4326" opacity="0.7">
+        <rect x="8" y="8" width="6" height="28"/>
+        <rect x="18" y="10" width="6" height="26"/>
+        <rect x="30" y="6" width="6" height="30"/>
+        <rect x="44" y="9" width="6" height="27"/>
+        <rect x="56" y="7" width="6" height="29"/>
+        <rect x="70" y="10" width="6" height="26"/>
+        <rect x="84" y="8" width="6" height="28"/>
+        <rect x="98" y="6" width="6" height="30"/>
+        <rect x="112" y="9" width="6" height="27"/>
+        <rect x="126" y="7" width="6" height="29"/>
+      </g>
+    </g>
+    <g transform="translate(1430,560) scale(-1,1) translate(-150,0)">
+      <rect width="150" height="300" fill="#0b0805"/>
+      <g stroke="#241a10" stroke-width="4">
+        <line x1="0" y1="40" x2="150" y2="40"/>
+        <line x1="0" y1="90" x2="150" y2="90"/>
+        <line x1="0" y1="140" x2="150" y2="140"/>
+        <line x1="0" y1="190" x2="150" y2="190"/>
+        <line x1="0" y1="240" x2="150" y2="240"/>
+      </g>
+      <g fill="#5c4326" opacity="0.7">
+        <rect x="8" y="8" width="6" height="28"/>
+        <rect x="18" y="10" width="6" height="26"/>
+        <rect x="30" y="6" width="6" height="30"/>
+        <rect x="44" y="9" width="6" height="27"/>
+        <rect x="56" y="7" width="6" height="29"/>
+        <rect x="70" y="10" width="6" height="26"/>
+        <rect x="84" y="8" width="6" height="28"/>
+        <rect x="98" y="6" width="6" height="30"/>
+        <rect x="112" y="9" width="6" height="27"/>
+        <rect x="126" y="7" width="6" height="29"/>
+      </g>
+    </g>
+  </g>
+
+  <rect x="0" y="0" width="1600" height="900" fill="url(#vignette)"/>
+</svg>

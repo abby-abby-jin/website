@@ -58,6 +58,36 @@ const floors = [
   },
 ];
 
+// ---------------------------------------------------------
+// 예시 층 10개 — 수직 컷 트랜지션 데모용 placeholder
+// 영상은 저작권 문제가 없는 공개 데모/CC 영상 소스만 사용
+// (실제 프로젝트 영상/카피로 교체 예정)
+// ---------------------------------------------------------
+const exampleClips = [
+  ["Big Buck Bunny", "https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4"],
+  ["Elephants Dream", "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4"],
+  ["Sintel — Trailer", "https://media.w3.org/2010/05/sintel/trailer.mp4"],
+  ["Sintel — Trailer HD", "https://media.w3.org/2010/05/sintel/trailer_hd.mp4"],
+  ["Big Buck Bunny — Movie", "https://media.w3.org/2010/05/bunny/movie.mp4"],
+  ["Big Buck Bunny — Trailer", "https://media.w3.org/2010/05/bunny/trailer.mp4"],
+  ["Oceans", "https://vjs.zencdn.net/v/oceans.mp4"],
+  ["Flower", "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"],
+  ["Sample Clip A", "https://download.samplelib.com/mp4/sample-10s.mp4"],
+  ["Sample Clip B", "https://download.samplelib.com/mp4/sample-20s.mp4"],
+];
+exampleClips.forEach(([name, url], i) => {
+  floors.push({
+    id: `example-${i + 1}`,
+    type: "video",
+    eyebrow: "Example Clip",
+    title: name,
+    issue: "예시 콘텐츠입니다.",
+    solution: "층 이동 트랜지션 데모용 placeholder이며, 실제 프로젝트 영상/카피로 교체될 자리입니다.",
+    heroVideo: url,
+    script: [{ speaker: "NOTE", lines: ["실제 카피가 이 자리에 들어갑니다."] }],
+  });
+});
+
 // forced-random 순서 큐
 let queue = [];
 function refillQueue() {
@@ -116,20 +146,24 @@ function playTransition(onDone) {
   setTimeout(() => slices.classList.remove("playing"), 600);
 }
 
+let floorToken = 0;
+
 function enterFloor(i) {
+  floorToken += 1;
+  scrollAnimToken += 1; // 이전 층에서 진행 중이던 스크롤 애니메이션 무효화
   currentFloor = floors[i];
   seenCount += 1;
   floorIndicator.textContent = `FLOOR ${String(seenCount).padStart(2, "0")} · ${currentFloor.eyebrow.toUpperCase()}`;
 
   Object.values(chamberEls).forEach((el) => el.classList.remove("active"));
-  if (currentFloor.type === "video") {
-    renderVideoChamber(currentFloor);
-    chamberEls.video.classList.add("active");
-  } else {
-    renderSnsChamber(currentFloor);
-    chamberEls.sns.classList.add("active");
-  }
   setView("chamber");
+  if (currentFloor.type === "video") {
+    chamberEls.video.classList.add("active");
+    renderVideoChamber(currentFloor);
+  } else {
+    chamberEls.sns.classList.add("active");
+    renderSnsChamber(currentFloor);
+  }
 }
 
 function goToLobby() {
@@ -147,11 +181,23 @@ function goToNextFloor() {
 // ---------------------------------------------------------
 // VIDEO CHAMBER
 // ---------------------------------------------------------
+let cornerTimer = null;
+
 function renderVideoChamber(floor) {
+  const myToken = floorToken;
+
   $("#video-eyebrow").textContent = floor.eyebrow;
   $("#video-title").textContent = floor.title;
   $("#wn-issue").textContent = floor.issue;
   $("#wn-solution").textContent = floor.solution;
+
+  // 제목: 잠깐 크게 보여준 뒤 우측 상단으로 작게 페이드 (영상 시청 방해 X)
+  const heroOverlay = $("#hero-overlay");
+  heroOverlay.classList.remove("corner");
+  clearTimeout(cornerTimer);
+  cornerTimer = setTimeout(() => {
+    if (myToken === floorToken) heroOverlay.classList.add("corner");
+  }, 1800);
 
   const heroVideo = $("#hero-video");
   if (floor.heroVideo) {
@@ -177,24 +223,15 @@ function renderVideoChamber(floor) {
     )
     .join("");
 
-  $("#chamber-video").scrollTo({ top: 0 });
+  $("#chamber-video").scrollTo({ top: 0, behavior: "instant" });
 }
 
-function smoothScrollTo(el, target, duration = 500) {
-  const start = el.scrollTop;
-  const change = target - start;
-  const startTime = Date.now();
-  (function step() {
-    const t = Math.min(1, (Date.now() - startTime) / duration);
-    const eased = 1 - Math.pow(1 - t, 3);
-    el.scrollTop = start + change * eased;
-    if (t < 1) setTimeout(step, 16);
-  })();
-}
+let scrollAnimToken = 0; // 층 전환 시 증가 — 다른 로직에서 참조하는 무효화 토큰
 
 function scrollToNotes() {
+  scrollAnimToken += 1;
   const container = $("#chamber-video");
-  smoothScrollTo(container, $("#working-notes").offsetTop);
+  container.scrollTop = $("#working-notes").offsetTop;
 }
 
 function openPanel(sel) {
@@ -347,6 +384,28 @@ document.addEventListener("keydown", (e) => {
     }
   }
 });
+
+// SNS 챔버: 마우스/트랙패드 가로 스크롤로도 게시물 탐색
+let wheelCooldown = false;
+document.addEventListener(
+  "wheel",
+  (e) => {
+    if (view !== "chamber" || !currentFloor || currentFloor.type !== "sns") return;
+    if ($("#sns-detail").classList.contains("open")) return;
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (Math.abs(delta) < 8) return;
+    e.preventDefault();
+    if (wheelCooldown) return;
+    wheelCooldown = true;
+    setTimeout(() => { wheelCooldown = false; }, 350);
+    if (delta > 0) {
+      setSnsActive(Math.min(snsActive + 1, currentFloor.posts.length - 1));
+    } else {
+      setSnsActive(Math.max(snsActive - 1, 0));
+    }
+  },
+  { passive: false }
+);
 
 $("#wn-cta").addEventListener("click", scrollToNotes);
 $("#hero-mute").addEventListener("click", () => {

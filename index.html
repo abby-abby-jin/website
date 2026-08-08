@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>선진이 포폴 — 하나의 성</title>
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
 
@@ -28,9 +28,6 @@
         <div class="tower-glow"></div>
       </div>
       <div class="lobby-copy">
-        <p class="eyebrow">Main Hub — Lobby</p>
-        <h1>하나의 성</h1>
-        <p class="sub">층마다 살고 있는 캐릭터들</p>
         <p class="prompt">↑ / ↓ 방향키를 눌러 탐험해보세요</p>
       </div>
     </section>
@@ -51,7 +48,7 @@
         <div class="video-hero">
           <video id="hero-video" class="hero-video" muted loop playsinline autoplay></video>
           <button id="hero-mute" class="hero-mute" aria-label="소리 켜기/끄기">🔇</button>
-          <div class="hero-overlay">
+          <div class="hero-overlay" id="hero-overlay">
             <p class="eyebrow" id="video-eyebrow"></p>
             <h2 id="video-title"></h2>
           </div>
@@ -98,6 +95,6 @@
 
   </main>
 
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
