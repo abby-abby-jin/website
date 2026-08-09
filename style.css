@@ -165,30 +165,35 @@ html,body{
   background:linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.85) 100%);
   pointer-events:none;
 }
+/* font-size는 애니메이션하지 않고 scale()로만 축소(리플로우 없어 매끄러움).
+   위치는 top/left로, 크기는 transform-origin을 상태별로 맞춘 scale()로 분리 */
 .hero-overlay{
   position:absolute; top:38%; left:50%;
   transform:translate(-50%,-50%) scale(1);
+  transform-origin:center center;
   text-align:center;
   z-index:2;
   text-shadow:0 2px 30px rgba(0,0,0,.8);
-  transition:top .7s cubic-bezier(.6,0,.2,1), left .7s cubic-bezier(.6,0,.2,1),
-             transform .7s cubic-bezier(.6,0,.2,1), opacity .7s ease;
+  transition:top .9s cubic-bezier(.22,1,.36,1), left .9s cubic-bezier(.22,1,.36,1),
+             transform .9s cubic-bezier(.22,1,.36,1), transform-origin .9s cubic-bezier(.22,1,.36,1),
+             opacity .9s ease;
+  will-change:top, left, transform, opacity;
 }
 .hero-overlay h2{
   font-family:'EB Garamond', serif;
   font-weight:600;
   font-size:clamp(1.8rem,4vw,2.8rem);
   margin:0;
-  transition:font-size .7s cubic-bezier(.6,0,.2,1);
 }
 .hero-overlay.corner{
-  top:1.6rem; left:auto; right:5.4rem;
-  transform:translate(0,0);
-  text-align:right;
+  top:2.3rem; left:6.2rem;
+  transform:scale(0.32);
+  transform-origin:left top;
+  text-align:left;
   opacity:.82;
 }
-.hero-overlay.corner .eyebrow{ display:none; }
-.hero-overlay.corner h2{ font-size:.85rem; letter-spacing:.03em; }
+.hero-overlay.corner .eyebrow{ opacity:0; transition:opacity .4s ease; }
+
 .hero-mute{
   position:absolute; bottom:6.5rem; right:1.5rem; z-index:2;
   width:40px; height:40px; border-radius:50%;
