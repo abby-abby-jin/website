@@ -1,10 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1300" shape-rendering="crispEdges">
   <defs>
-    <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2a1a3a"/>
-      <stop offset="45%" stop-color="#1c1330"/>
-      <stop offset="100%" stop-color="#0b0b12"/>
-    </linearGradient>
     <pattern id="brick" width="20" height="20" patternUnits="userSpaceOnUse">
       <rect width="20" height="20" fill="#2e2440"/>
       <rect width="20" height="10" fill="#352a49"/>
@@ -50,17 +45,7 @@
     </g>
   </defs>
 
-  <rect x="0" y="0" width="400" height="1300" fill="url(#dusk)"/>
-
-  <!-- 별 -->
-  <g fill="#e8d4a0" opacity="0.7">
-    <rect x="30" y="40" width="3" height="3"/>
-    <rect x="90" y="90" width="2" height="2"/>
-    <rect x="340" y="60" width="3" height="3"/>
-    <rect x="300" y="140" width="2" height="2"/>
-    <rect x="60" y="180" width="2" height="2"/>
-    <rect x="360" y="220" width="3" height="3"/>
-  </g>
+  <!-- 배경은 페이지 CSS와 동일한 그라디언트/별을 공유하도록 SVG 자체 배경은 투명 처리 -->
 
   <!-- 좌측 보조 타워 -->
   <g>
