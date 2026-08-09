@@ -4,97 +4,91 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>선진이 포폴 — 하나의 성</title>
-<link rel="stylesheet" href="style.css?v=6" />
+<link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 
-  <div id="rotate-notice">
-    <div class="rotate-icon">↻</div>
-    <p>가로로 돌려주세요</p>
-  </div>
-
-  <button id="home-btn" title="로비로 돌아가기" aria-label="로비로 돌아가기">🏰</button>
   <button id="ambience-btn" title="앰비언스 사운드" aria-label="앰비언스 사운드">🔈</button>
-  <div id="floor-indicator"></div>
 
-  <main id="app">
+  <!-- ================= 성 스크롤 페이지 ================= -->
+  <main id="view-castle">
+    <div class="castle-intro">
+      <p class="prompt">↓ 스크롤해서 성을 내려가보세요</p>
+    </div>
 
-    <!-- LOBBY -->
-    <section id="view-lobby" class="view active">
-      <div class="tower">
-        <div class="tower-layer l1"></div>
-        <div class="tower-layer l2"></div>
-        <div class="tower-layer l3"></div>
-        <div class="tower-glow"></div>
-      </div>
-      <div class="lobby-copy">
-        <p class="prompt">↑ / ↓ 방향키를 눌러 탐험해보세요</p>
-      </div>
-    </section>
+    <div class="castle-wrap">
+      <img src="images/castle-pixel.svg" class="castle-img" alt="하나의 성" />
 
-    <!-- TRANSITION -->
-    <section id="view-transition" class="view">
-      <div class="slices">
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-    </section>
+      <button class="floor-hotspot" data-floor="binggrae" style="top:23.5%;height:8%;">
+        <span class="floor-glow"></span>
+        <span class="floor-tag">
+          <em>Video Campaign</em>
+          빙그레 — 브랜디드 캠페인
+        </span>
+      </button>
 
-    <!-- PROJECT CHAMBER -->
-    <section id="view-chamber" class="view">
+      <button class="floor-hotspot" data-floor="mermaid" style="top:54.5%;height:8%;">
+        <span class="floor-glow"></span>
+        <span class="floor-tag">
+          <em>SNS Campaign</em>
+          氷어공주 — SNS 캠페인
+        </span>
+      </button>
+    </div>
 
-      <!-- video-format chamber -->
-      <div id="chamber-video" class="chamber-type video-chamber">
-
-        <div class="video-hero">
-          <video id="hero-video" class="hero-video" muted loop playsinline autoplay></video>
-          <button id="hero-mute" class="hero-mute" aria-label="소리 켜기/끄기">🔇</button>
-          <div class="hero-overlay" id="hero-overlay">
-            <p class="eyebrow" id="video-eyebrow"></p>
-            <h2 id="video-title"></h2>
-          </div>
-          <button id="wn-cta" class="wn-cta">
-            Working Note <span class="wn-cta-arrow">⌄</span>
-          </button>
-        </div>
-
-        <div id="working-notes" class="notes-section">
-          <div class="notes-inner">
-            <p class="eyebrow">기획의도</p>
-            <div class="meta-grid">
-              <div><span class="meta-label">ISSUE</span><p id="wn-issue"></p></div>
-              <div><span class="meta-label">SOLUTION</span><p id="wn-solution"></p></div>
-            </div>
-
-            <p class="eyebrow notes-copy-label">카피라이팅</p>
-            <div class="credits" id="wn-script"></div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- sns-format chamber -->
-      <div id="chamber-sns" class="chamber-type">
-        <div class="chamber-label">
-          <p class="eyebrow" id="sns-eyebrow"></p>
-          <h2 id="sns-title"></h2>
-        </div>
-
-        <div class="carousel" id="sns-carousel"></div>
-        <p class="hint">← / → 로 게시물 탐색, 클릭하면 카피 전체 보기</p>
-
-        <div id="sns-detail" class="panel">
-          <button class="panel-close" id="sns-close" aria-label="닫기">✕</button>
-          <div class="panel-inner sns-detail-inner">
-            <div class="sns-detail-image" id="sns-detail-image"></div>
-            <p class="sns-detail-caption" id="sns-detail-caption"></p>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
+    <p class="castle-outro">더 많은 캐릭터가 곧 이 성에 입주할 예정입니다</p>
   </main>
 
-  <script src="script.js?v=4"></script>
+  <!-- ================= 프로젝트 상세 오버레이 ================= -->
+  <div id="chamber-overlay">
+    <button id="overlay-close">✕ 성으로 돌아가기</button>
+
+    <div id="chamber-video" class="chamber-type video-chamber">
+      <div class="video-hero">
+        <video id="hero-video" class="hero-video" muted loop playsinline autoplay></video>
+        <button id="hero-mute" class="hero-mute" aria-label="소리 켜기/끄기">🔇</button>
+        <div class="hero-overlay" id="hero-overlay">
+          <p class="eyebrow" id="video-eyebrow"></p>
+          <h2 id="video-title"></h2>
+        </div>
+        <button id="wn-cta" class="wn-cta">
+          Working Note <span class="wn-cta-arrow">⌄</span>
+        </button>
+      </div>
+
+      <div id="working-notes" class="notes-section">
+        <div class="notes-inner">
+          <p class="eyebrow">기획의도</p>
+          <div class="meta-grid">
+            <div><span class="meta-label">ISSUE</span><p id="wn-issue"></p></div>
+            <div><span class="meta-label">SOLUTION</span><p id="wn-solution"></p></div>
+          </div>
+
+          <p class="eyebrow notes-copy-label">카피라이팅</p>
+          <div class="credits" id="wn-script"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="chamber-sns" class="chamber-type">
+      <div class="chamber-label">
+        <p class="eyebrow" id="sns-eyebrow"></p>
+        <h2 id="sns-title"></h2>
+      </div>
+
+      <div class="carousel" id="sns-carousel"></div>
+      <p class="hint">← / → 로 게시물 탐색, 클릭하면 카피 전체 보기</p>
+
+      <div id="sns-detail" class="panel">
+        <button class="panel-close" id="sns-close" aria-label="닫기">✕</button>
+        <div class="panel-inner sns-detail-inner">
+          <div class="sns-detail-image" id="sns-detail-image"></div>
+          <p class="sns-detail-caption" id="sns-detail-caption"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=5"></script>
 </body>
 </html>
