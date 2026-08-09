@@ -193,6 +193,7 @@ html,body{
   opacity:.82;
 }
 .hero-overlay.corner .eyebrow{ opacity:0; transition:opacity .4s ease; }
+.hero-overlay.no-anim{ transition:none; }
 
 .hero-mute{
   position:absolute; bottom:6.5rem; right:1.5rem; z-index:2;

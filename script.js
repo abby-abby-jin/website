@@ -148,7 +148,7 @@ function playTransition(onDone) {
 
 let floorToken = 0;
 
-function enterFloor(i) {
+function enterFloor(i, opts = {}) {
   floorToken += 1;
   scrollAnimToken += 1; // 이전 층에서 진행 중이던 스크롤 애니메이션 무효화
   currentFloor = floors[i];
@@ -159,7 +159,7 @@ function enterFloor(i) {
   setView("chamber");
   if (currentFloor.type === "video") {
     chamberEls.video.classList.add("active");
-    renderVideoChamber(currentFloor);
+    renderVideoChamber(currentFloor, opts);
   } else {
     chamberEls.sns.classList.add("active");
     renderSnsChamber(currentFloor);
@@ -173,9 +173,16 @@ function goToLobby() {
   });
 }
 
+// 방향키를 꾹 누르고 있는 동안: 검은 트랜지션/타이틀 노출 없이 영상 장면만 컷컷 전환
+let isHolding = false;
+
 function goToNextFloor() {
   const i = nextFloorIndex();
-  playTransition(() => enterFloor(i));
+  if (isHolding) {
+    enterFloor(i, { fast: true });
+  } else {
+    playTransition(() => enterFloor(i));
+  }
 }
 
 // ---------------------------------------------------------
@@ -183,7 +190,8 @@ function goToNextFloor() {
 // ---------------------------------------------------------
 let cornerTimer = null;
 
-function renderVideoChamber(floor) {
+function renderVideoChamber(floor, opts = {}) {
+  const fast = !!opts.fast;
   const myToken = floorToken;
 
   $("#video-eyebrow").textContent = floor.eyebrow;
@@ -191,13 +199,19 @@ function renderVideoChamber(floor) {
   $("#wn-issue").textContent = floor.issue;
   $("#wn-solution").textContent = floor.solution;
 
-  // 제목: 잠깐 크게 보여준 뒤 우측 상단으로 작게 페이드 (영상 시청 방해 X)
+  // 제목: 잠깐 크게 보여준 뒤 좌측 상단으로 작게 페이드 (영상 시청 방해 X)
+  // 단, 방향키를 꾹 눌러 빠르게 넘기는 중에는 타이틀/트랜지션 없이 영상 장면만 보이도록 생략
   const heroOverlay = $("#hero-overlay");
-  heroOverlay.classList.remove("corner");
   clearTimeout(cornerTimer);
-  cornerTimer = setTimeout(() => {
-    if (myToken === floorToken) heroOverlay.classList.add("corner");
-  }, 1800);
+  if (fast) {
+    heroOverlay.classList.add("no-anim", "corner");
+  } else {
+    heroOverlay.classList.remove("corner");
+    heroOverlay.classList.remove("no-anim");
+    cornerTimer = setTimeout(() => {
+      if (myToken === floorToken) heroOverlay.classList.add("corner");
+    }, 1800);
+  }
 
   const heroVideo = $("#hero-video");
   if (floor.heroVideo) {
@@ -353,6 +367,7 @@ document.addEventListener("keydown", (e) => {
   if (view === "lobby") {
     if (["ArrowUp", "ArrowDown", "Enter", " "].includes(e.key)) {
       e.preventDefault();
+      if (e.repeat && (e.key === "ArrowUp" || e.key === "ArrowDown")) isHolding = true;
       goToNextFloor();
     }
     return;
@@ -361,6 +376,7 @@ document.addEventListener("keydown", (e) => {
   if (view === "chamber") {
     if (e.key === "ArrowUp" || e.key === "ArrowDown") {
       e.preventDefault();
+      if (e.repeat) isHolding = true;
       goToNextFloor();
       return;
     }
@@ -382,6 +398,23 @@ document.addEventListener("keydown", (e) => {
         openSnsDetail(currentFloor, snsActive);
       }
     }
+  }
+});
+
+// 방향키를 놓으면: 꾹 누르는 동안 생략했던 타이틀 노출을 지금 층에서 정상적으로 재생
+document.addEventListener("keyup", (e) => {
+  if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+  if (!isHolding) return;
+  isHolding = false;
+  if (view === "chamber" && currentFloor && currentFloor.type === "video") {
+    const heroOverlay = $("#hero-overlay");
+    const myToken = floorToken;
+    heroOverlay.classList.remove("no-anim", "corner");
+    void heroOverlay.offsetWidth; // no-anim 제거를 반영시킨 뒤 다시 트랜지션 걸리도록 리플로우
+    clearTimeout(cornerTimer);
+    cornerTimer = setTimeout(() => {
+      if (myToken === floorToken) heroOverlay.classList.add("corner");
+    }, 1400);
   }
 });
 
