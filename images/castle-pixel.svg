@@ -21,6 +21,23 @@
       <rect x="10" y="0" width="1" height="10" fill="#2a2140"/>
       <rect x="0" y="10" width="1" height="10" fill="#2a2140"/>
     </pattern>
+
+    <!-- 빙그레우스 픽셀 캐릭터 (왕관·빨간머리·안경, 16x28) -->
+    <g id="char-binggraeus">
+      <rect x="6" y="0" width="4" height="3" fill="#f4c968"/>
+      <rect x="2" y="3" width="12" height="3" fill="#f4c968"/>
+      <rect x="6" y="1" width="4" height="2" fill="#e0483c"/>
+      <rect x="0" y="6" width="16" height="2" fill="#c9a35a"/>
+      <rect x="0" y="8" width="16" height="14" fill="#6b1f2a"/>
+      <rect x="3" y="10" width="10" height="10" fill="#f2c9a0"/>
+      <rect x="2" y="8" width="3" height="5" fill="#6b1f2a"/>
+      <rect x="11" y="8" width="3" height="5" fill="#6b1f2a"/>
+      <rect x="3" y="14" width="4" height="2" fill="#1a1a1a"/>
+      <rect x="9" y="14" width="4" height="2" fill="#1a1a1a"/>
+      <rect x="7" y="14" width="2" height="1" fill="#1a1a1a"/>
+      <rect x="1" y="22" width="14" height="6" fill="#8c1f2a"/>
+      <rect x="6" y="22" width="4" height="3" fill="#f2c9a0"/>
+    </g>
   </defs>
 
   <rect x="0" y="0" width="400" height="1300" fill="url(#dusk)"/>
@@ -86,13 +103,9 @@
     <rect x="155" y="345" width="24" height="34" fill="#f4c968"/>
     <rect x="216" y="340" width="34" height="44" fill="#3a2712"/>
     <rect x="221" y="345" width="24" height="34" fill="#f4c968"/>
-    <!-- 픽셀 캐릭터 실루엣 -->
-    <g fill="#241a33">
-      <rect x="163" y="358" width="8" height="8"/>
-      <rect x="161" y="366" width="12" height="12"/>
-      <rect x="229" y="356" width="8" height="10"/>
-      <rect x="227" y="366" width="12" height="12"/>
-    </g>
+    <!-- 빙그레우스 -->
+    <use href="#char-binggraeus" x="159" y="347"/>
+    <use href="#char-binggraeus" x="225" y="347"/>
   </g>
 
   <!-- Floor 3 (공실) y~540 -->
