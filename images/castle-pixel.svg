@@ -13,16 +13,8 @@
       <rect x="10" y="0" width="1" height="10" fill="#221a33"/>
       <rect x="0" y="10" width="1" height="10" fill="#221a33"/>
     </pattern>
-    <pattern id="brickTower" width="20" height="20" patternUnits="userSpaceOnUse">
-      <rect width="20" height="20" fill="#3a2d52"/>
-      <rect width="20" height="10" fill="#41335c"/>
-      <rect x="0" y="0" width="20" height="1" fill="#2a2140"/>
-      <rect x="0" y="10" width="20" height="1" fill="#2a2140"/>
-      <rect x="10" y="0" width="1" height="10" fill="#2a2140"/>
-      <rect x="0" y="10" width="1" height="10" fill="#2a2140"/>
-    </pattern>
 
-    <!-- 빙그레우스 픽셀 캐릭터 (왕관·빨간머리·안경, 16x28) -->
+    <!-- 빙그레우스 픽셀 캐릭터 — 전신 (16x42) -->
     <g id="char-binggraeus">
       <rect x="6" y="0" width="4" height="3" fill="#f4c968"/>
       <rect x="2" y="3" width="12" height="3" fill="#f4c968"/>
@@ -37,6 +29,24 @@
       <rect x="7" y="14" width="2" height="1" fill="#1a1a1a"/>
       <rect x="1" y="22" width="14" height="6" fill="#8c1f2a"/>
       <rect x="6" y="22" width="4" height="3" fill="#f2c9a0"/>
+      <rect x="1" y="28" width="14" height="8" fill="#7a1c26"/>
+      <rect x="2" y="36" width="5" height="6" fill="#241a2e"/>
+      <rect x="9" y="36" width="5" height="6" fill="#241a2e"/>
+    </g>
+
+    <!-- 인어공주 픽셀 캐릭터 — 전신 (16x42) -->
+    <g id="char-mermaid">
+      <rect x="1" y="0" width="14" height="6" fill="#e8a94a"/>
+      <rect x="0" y="6" width="4" height="11" fill="#e8a94a"/>
+      <rect x="12" y="6" width="4" height="11" fill="#e8a94a"/>
+      <rect x="4" y="6" width="8" height="8" fill="#f2c9a0"/>
+      <rect x="5" y="10" width="2" height="1" fill="#1a1a1a"/>
+      <rect x="9" y="10" width="2" height="1" fill="#1a1a1a"/>
+      <rect x="3" y="14" width="10" height="6" fill="#2a8a8a"/>
+      <rect x="2" y="20" width="12" height="14" fill="#1f6f6f"/>
+      <rect x="4" y="34" width="8" height="6" fill="#175a5a"/>
+      <rect x="0" y="38" width="6" height="4" fill="#175a5a"/>
+      <rect x="10" y="38" width="6" height="4" fill="#175a5a"/>
     </g>
   </defs>
 
@@ -60,6 +70,18 @@
       <rect x="58" y="200" width="14" height="20"/>
       <rect x="86" y="200" width="14" height="20"/>
     </g>
+    <g fill="#191225" opacity="0.85">
+      <rect x="42" y="280" width="16" height="22"/>
+      <rect x="72" y="280" width="16" height="22"/>
+      <rect x="42" y="480" width="16" height="22"/>
+      <rect x="72" y="480" width="16" height="22"/>
+      <rect x="42" y="680" width="16" height="22"/>
+      <rect x="72" y="680" width="16" height="22"/>
+      <rect x="42" y="880" width="16" height="22"/>
+      <rect x="72" y="880" width="16" height="22"/>
+      <rect x="42" y="1080" width="16" height="22"/>
+      <rect x="72" y="1080" width="16" height="22"/>
+    </g>
   </g>
   <!-- 우측 보조 타워 -->
   <g>
@@ -69,10 +91,22 @@
       <rect x="328" y="240" width="14" height="20"/>
       <rect x="356" y="240" width="14" height="20"/>
     </g>
+    <g fill="#191225" opacity="0.85">
+      <rect x="312" y="320" width="16" height="22"/>
+      <rect x="342" y="320" width="16" height="22"/>
+      <rect x="312" y="520" width="16" height="22"/>
+      <rect x="342" y="520" width="16" height="22"/>
+      <rect x="312" y="720" width="16" height="22"/>
+      <rect x="342" y="720" width="16" height="22"/>
+      <rect x="312" y="920" width="16" height="22"/>
+      <rect x="342" y="920" width="16" height="22"/>
+      <rect x="312" y="1100" width="16" height="22"/>
+      <rect x="342" y="1100" width="16" height="22"/>
+    </g>
   </g>
 
-  <!-- 중앙 메인 타워 -->
-  <rect x="110" y="80" width="180" height="1140" fill="url(#brickTower)"/>
+  <!-- 중앙 메인 타워 — 뼈대(측벽) -->
+  <rect x="110" y="80" width="180" height="1100" fill="#241a33"/>
 
   <!-- 흉벽(크레넬레이션) -->
   <g fill="#41335c">
@@ -88,62 +122,67 @@
   <rect x="196" y="10" width="4" height="50" fill="#8a6a37"/>
   <path d="M200 14 L236 24 L200 34 Z" fill="#c9a35a"/>
 
-  <!-- ===== 창문 6개 층 (아래로 스크롤하며 등장) ===== -->
-  <!-- Floor 1 (공실) y~140 -->
+  <!-- ===== 컷어웨이 층 6개 (내부가 보이는 구조) ===== -->
+
+  <!-- Room 1 (공실) y 84-267 -->
   <g class="pixel-window" data-floor="vacant">
-    <rect x="170" y="140" width="26" height="34" fill="#191225"/>
-    <rect x="174" y="144" width="18" height="26" fill="#241a33"/>
-    <rect x="204" y="140" width="26" height="34" fill="#191225"/>
-    <rect x="208" y="144" width="18" height="26" fill="#241a33"/>
+    <rect x="114" y="84" width="172" height="177" fill="#241a33"/>
+    <rect x="120" y="150" width="26" height="34" fill="#2e2244" opacity="0.6"/>
+    <rect x="254" y="150" width="26" height="34" fill="#2e2244" opacity="0.6"/>
+    <rect x="114" y="255" width="172" height="6" fill="#3a2d52"/>
   </g>
 
-  <!-- Floor 2 — 빙그레 (실제 콘텐츠) y~340 -->
+  <!-- Room 2 — 빙그레 (실제 콘텐츠) y 267-450 -->
   <g class="pixel-window" data-floor="binggrae" data-slot="floor-binggrae">
-    <rect x="150" y="340" width="34" height="44" fill="#3a2712"/>
-    <rect x="155" y="345" width="24" height="34" fill="#f4c968"/>
-    <rect x="216" y="340" width="34" height="44" fill="#3a2712"/>
-    <rect x="221" y="345" width="24" height="34" fill="#f4c968"/>
+    <rect x="114" y="267" width="172" height="177" fill="#3a2712"/>
+    <rect x="114" y="267" width="172" height="10" fill="#4a3218"/>
+    <!-- 책상 -->
+    <rect x="122" y="400" width="46" height="8" fill="#5c3d1c"/>
+    <rect x="126" y="408" width="4" height="20" fill="#4a3018"/>
+    <rect x="160" y="408" width="4" height="20" fill="#4a3018"/>
+    <rect x="128" y="386" width="30" height="14" fill="#e8d4a0" opacity="0.9"/>
     <!-- 빙그레우스 -->
-    <use href="#char-binggraeus" x="159" y="347"/>
-    <use href="#char-binggraeus" x="225" y="347"/>
+    <use href="#char-binggraeus" transform="translate(207,342) scale(2.2)"/>
+    <rect x="114" y="438" width="172" height="6" fill="#5c3d1c"/>
   </g>
 
-  <!-- Floor 3 (공실) y~540 -->
+  <!-- Room 3 (공실) y 450-633 -->
   <g class="pixel-window" data-floor="vacant">
-    <rect x="170" y="540" width="26" height="34" fill="#191225"/>
-    <rect x="174" y="544" width="18" height="26" fill="#241a33"/>
-    <rect x="204" y="540" width="26" height="34" fill="#191225"/>
-    <rect x="208" y="544" width="18" height="26" fill="#241a33"/>
+    <rect x="114" y="450" width="172" height="177" fill="#241a33"/>
+    <rect x="120" y="516" width="26" height="34" fill="#2e2244" opacity="0.6"/>
+    <rect x="254" y="516" width="26" height="34" fill="#2e2244" opacity="0.6"/>
+    <rect x="114" y="621" width="172" height="6" fill="#3a2d52"/>
   </g>
 
-  <!-- Floor 4 — SNS 캠페인 (실제 콘텐츠) y~740 -->
+  <!-- Room 4 — SNS 캠페인 (실제 콘텐츠) y 633-816 -->
   <g class="pixel-window" data-floor="mermaid" data-slot="floor-mermaid">
-    <rect x="150" y="740" width="34" height="44" fill="#123a3a"/>
-    <rect x="155" y="745" width="24" height="34" fill="#6fd8d8"/>
-    <rect x="216" y="740" width="34" height="44" fill="#123a3a"/>
-    <rect x="221" y="745" width="24" height="34" fill="#6fd8d8"/>
+    <rect x="114" y="633" width="172" height="177" fill="#123a3a"/>
+    <rect x="114" y="633" width="172" height="10" fill="#184848"/>
+    <!-- 액자(피드) -->
     <g fill="#0d2a2a">
-      <rect x="163" y="758" width="8" height="8"/>
-      <rect x="161" y="766" width="12" height="14"/>
-      <rect x="229" y="758" width="8" height="8"/>
-      <rect x="227" y="766" width="12" height="14"/>
+      <rect x="226" y="660" width="18" height="18"/>
+      <rect x="248" y="660" width="18" height="18"/>
+      <rect x="226" y="682" width="18" height="18"/>
+      <rect x="248" y="682" width="18" height="18"/>
     </g>
+    <!-- 인어공주 -->
+    <use href="#char-mermaid" transform="translate(142,712) scale(2.2)"/>
+    <rect x="114" y="804" width="172" height="6" fill="#0d2a2a"/>
   </g>
 
-  <!-- Floor 5 (공실) y~940 -->
+  <!-- Room 5 (공실) y 816-999 -->
   <g class="pixel-window" data-floor="vacant">
-    <rect x="170" y="940" width="26" height="34" fill="#191225"/>
-    <rect x="174" y="944" width="18" height="26" fill="#241a33"/>
-    <rect x="204" y="940" width="26" height="34" fill="#191225"/>
-    <rect x="208" y="944" width="18" height="26" fill="#241a33"/>
+    <rect x="114" y="816" width="172" height="177" fill="#241a33"/>
+    <rect x="120" y="882" width="26" height="34" fill="#2e2244" opacity="0.6"/>
+    <rect x="254" y="882" width="26" height="34" fill="#2e2244" opacity="0.6"/>
+    <rect x="114" y="987" width="172" height="6" fill="#3a2d52"/>
   </g>
 
-  <!-- Floor 6 (공실, "다음 입주 예정") y~1120 -->
+  <!-- Room 6 (공실, "다음 입주 예정") y 999-1180 -->
   <g class="pixel-window" data-floor="vacant">
-    <rect x="170" y="1120" width="26" height="34" fill="#191225"/>
-    <rect x="174" y="1124" width="18" height="26" fill="#241a33"/>
-    <rect x="204" y="1120" width="26" height="34" fill="#191225"/>
-    <rect x="208" y="1124" width="18" height="26" fill="#241a33"/>
+    <rect x="114" y="999" width="172" height="175" fill="#241a33"/>
+    <rect x="120" y="1063" width="26" height="34" fill="#2e2244" opacity="0.6"/>
+    <rect x="254" y="1063" width="26" height="34" fill="#2e2244" opacity="0.6"/>
   </g>
 
   <!-- 정문 -->
